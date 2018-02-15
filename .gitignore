@@ -99,3 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+#swp
+.swp.py
+.swo.py
