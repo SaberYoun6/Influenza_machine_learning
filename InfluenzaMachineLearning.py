@@ -5,7 +5,10 @@
 ## objective:
 ## 
 #############################
-
+from sklearn import svm 
+from sklearn.tree import DecisionTreeRegessor
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 
