@@ -1,17 +1,16 @@
 import multiprocessing as mpi
 import time
 import sys
-import 
 
 def worker():
     name = mpi.current_process().name
     print name , "Starting"
-    time.sleep(60)
+    time.sleep(2)
     print name, "Exiting"
 def my_service():
     name = mpi.current_process().name
     print name, 'starting'
-    time.sleep(50)
+    time.sleep(3)
     print name, 'exiting'
 
 def main():
