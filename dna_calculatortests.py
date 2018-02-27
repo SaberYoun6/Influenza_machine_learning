@@ -3,10 +3,11 @@
 #For order of nucleotides, we go in the order A,C,T,G
 
 sequence = "ATCGTCGATCGTAGCTGATCGTAGTTTGGGCCAAGCTGCTGCCGCGCGCTGATCGCTCGCTAGCTCGT"
-CpG_ratios, dinucleotide_frequencies, codon_frequencies, GC_content, AT_CG_ratios = [], [], [], [], []
+CpG_ratios, dinucleotide_frequencies, codon_frequencies, GC_contents, AT_CG_ratios = [], [], [], [], []
 length = float(len(sequence))
 
-
+def fullProfile(sequence)
+strainProfile = []
 A, C, T, G = 0, 0, 0, 0
 for i in range(0,len(sequence)): 
 	if sequence[i] == "A":
@@ -18,10 +19,13 @@ for i in range(0,len(sequence)):
 	if sequence[i] == "G":
 		G +=1
 
-GC_content.append((G+C)/length)
-AT_CG_ratios.append((float(A+T))/C+G)
+GC_content = (G+C)/length
+GC_contents.append(GC_content)
+
+AT_GC_ratio = (float(A+T))/C+G
+AT_CG_ratios.append(AT_CG_ratio)
 	
-CpGcounter = 0
+CpGcounter = 0.0
 for i in range(0,len(sequence)-1):
 	if sequence[i] == "C" and i != len(sequence):
 		if sequence[i+1] =="G":
@@ -33,7 +37,7 @@ Gfrequency = G/length
 Cfrequency = C/length
 CpGexpected = int((C*G)*length)
 
-CpGRatio = CpG_counter/CpGexpected
+CpGRatio = CpGcounter/CpGexpected
 CpG_ratios.append(CpGRatio)
 
 
@@ -41,7 +45,6 @@ CpG_ratios.append(CpGRatio)
 
 AA, AC, AT, AG, CA, CC, CT, CG, TA, TC, TT, TG, GA, GC, GT, GG = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 for i in range(0,len(sequence)-1):
-	
 	
 	if sequence[i] == "A":
 		if sequence[i+1] == "A":
@@ -94,9 +97,10 @@ for i in range(0,len(sequence)-1):
 		
 		if sequence[i+1] == "G":
 			GG +=1
-	
-dinucleotide_frequencies.append([AA/length, AC/length, AT/length, AG/length, CA/length, CC/length, CT/length, CG/length, TA/length, TC/length, TT/length, TG/length, GA/length, GC/length, GT/length, GG/length])
-			
+
+dinucleotide_frequency.append([AA/length, AC/length, AT/length, AG/length, CA/length, CC/length, CT/length, CG/length, TA/length, TC/length, TT/length, TG/length, GA/length, GC/length, GT/length, GG/length])			
+dinucleotide_frequencies.append(dinucleotide_frequency)
+
 codons = {"ATT":0, "ATC":0, "ATA":0, "CTT":0, "CTC":0, "CTA":0, "CTG":0, "TTA":0, "TTG":0, "GTT":0, "GTC":0, "GTA":0, "GTG":0, "TTT":0, "TTC":0, "ATG":0, "TGT":0, "TGC":0, "GCT":0, "GCC":0, "GCA":0, "GCG":0, "GGT":0, "GGC":0, "GGA":0, "GGG":0, "CCT":0, "CCC":0, "CCA":0, "CCG":0, "ACT":0, "ACC":0, "ACA":0, "ACG":0, "TCT":0, "TCC":0, "TCA":0, "TCG":0, "AGT":0, "AGC":0, "TAT":0, "TAC":0, "TGG":0, "CAA":0, "CAG":0, "AAT":0, "AAC":0, "CAT":0, "CAC":0, "GAA":0, "GAG":0, "GAT":0, "GAC":0, "AAA":0, "AAG":0, "CGT":0, "CGC":0, "CGA":0, "CGG":0, "AGA":0, "AGG":0, "TAA":0, "TAG":0, "TGA":0} 
 codon_frequency = []
 for i in range(0, len(sequence)-2):
