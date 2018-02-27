@@ -103,3 +103,6 @@ ENV/
 #swp
 .swp.py
 .swo.py
+#fasta
+.fasta
+.fastq
