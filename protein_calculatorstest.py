@@ -26,4 +26,4 @@ for x,y in dipeptides_dict.items():
 
 dipeptide_frequencies.append(dipeptide_frequency)	
 
-print aminoacid_frequencies, dipeptide_frequencies
+#return aminoacid_frequencies, dipeptide_frequencies
