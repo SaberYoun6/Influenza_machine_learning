@@ -1,9 +1,9 @@
 #These are calculators for the DNA motifs that we'll be using. They will likely be defined functions with return values that will
 #run on loops for each sequence in the influenza strains
-
+#For order of nucleotides, we go in the order A,C,T,G
 
 sequence = "ATCGTCGATCGTAGCTGATCGTAGTTTGGGCCAAGCTGCTGCCGCGCGCTGATCGCTCGCTAGCTCGT"
-CpG_counter, dinucleotide_frequencies, codon_frequencies, GC_content, AT_CG_ratios = [], [], [], [], []
+CpG_ratios, dinucleotide_frequencies, codon_frequencies, GC_content, AT_CG_ratios = [], [], [], [], []
 length = float(len(sequence))
 
 
@@ -28,8 +28,15 @@ for i in range(0,len(sequence)-1):
 			CpGcounter += 1
 	else:
 		continue
-		
-CpG_counter.append(CpGcounter/length)
+
+Gfrequency = G/length
+Cfrequency = C/length
+CpGexpected = int((C*G)*length)
+
+CpGRatio = CpG_counter/CpGexpected
+CpG_ratios.append(CpGRatio)
+
+
 
 
 AA, AC, AT, AG, CA, CC, CT, CG, TA, TC, TT, TG, GA, GC, GT, GG = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -103,4 +110,4 @@ codon_frequencies.append(codon_frequency)
 
 	
 			
-print CpG_counter, dinucleotide_frequencies, codon_frequencies, GC_content, AT_CG_ratios
+print CpG_ratios, dinucleotide_frequencies, codon_frequencies, GC_content, AT_CG_ratios
