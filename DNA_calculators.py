@@ -7,7 +7,7 @@
 #values from the dict are added to lists they are in the order A,C,G,T
 #For example, AA, AC, AG, AT or AAA, AAC, AAG, AAT
 
-
+## can you please stop updateing stuff via the web interface because I almost got a merege 
 #the fullProfile produces a list in the order CpG ratio, GC contenct, AT/GC ratio,
 #dinucleotide frequency, and then codon frequency 
 def fullProfile(sequence):
