@@ -19,9 +19,7 @@ class method():
 #this should return the header and the sequence data to read in for dna_calculatortest
         data= datafile
         heads=[]
-
-        for i,j in length(data):
-         return []
+        
          
 
 
