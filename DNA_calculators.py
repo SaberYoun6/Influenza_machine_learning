@@ -7,21 +7,21 @@
 #values from the dict are added to lists they are in the order A,C,G,T
 #For example, AA, AC, AG, AT or AAA, AAC, AAG, AAT
 
-## can you please stop updateing stuff via the web interface because I almost got a merege 
-#the fullProfile produces a list in the order CpG ratio, GC contenct, AT/GC ratio,
+
+#the fullProfile produces a list in the order GC content, AT/GC ratio, CpG ratio,
 #dinucleotide frequency, and then codon frequency 
-def fullProfile(sequence):
+def dnaProfile(sequence):
 	length = float(len(sequence))
 	strainProfile = []
 	A, C, G, T = 0, 0, 0, 0
-	for i in range(0,len(sequence)): 
-		if sequence[i] == "A":
+	for base in sequence: 
+		if base == "A":
 			A +=1
-		if sequence[i] == "C":
+		if base == "C":
 			C +=1
-		if sequence[i] == "T":
+		if base == "T":
 			T +=1
-		if sequence[i] == "G":
+		if base == "G":
 			G +=1
 
 	GC_content = (G+C)/length
@@ -40,7 +40,7 @@ def fullProfile(sequence):
 
 	Gfrequency = G/length
 	Cfrequency = C/length
-	CpGexpected = int((C*G)*length)
+	CpGexpected = int((Cfrequency*Gfrequency)*length)
 
 	CpGRatio = CpGcounter/CpGexpected
 	strainProfile.append(CpGRatio)
@@ -52,7 +52,7 @@ def fullProfile(sequence):
 		dinucleotide_dict[sequence[i:i+2]] += 1
 
 	for x,y in sorted(dinucleotide_dict.items()):
-		dinucleotide_frequency.append(y/length)
+		dinucleotide_frequency.append(y/float(len(dinucleotide_dict)))
 	
 	strainProfile.append(dinucleotide_frequency)
 
@@ -62,7 +62,7 @@ def fullProfile(sequence):
 		codons[sequence[i:i+3]] +=1
 
 	for x,y in sorted(codons.items()):
-		codon_frequency.append(y/length)
+		codon_frequency.append(y/float(len(codons)))
 	strainProfile.append(codon_frequency)
 	
 	return strainProfile
