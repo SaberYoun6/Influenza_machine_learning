@@ -1,12 +1,13 @@
 ##### title ########
 ## Authors : Samuel Young, Thomas Raymond, Bethany Yachuw
 ## starting date: 02/15/18
-## last date update: 02/15/18
+## last date update: 03/20/18
 ## objective:
 ## 
 #############################
-from sklearn import KMeans 
-from sklearn import dataset
+from sklearn import SVM 
+from sklearn import tree
+import graphviz
 import matplotlib.pyplot as plt
 import dna_calculatortets as DNA
 import protien_calculatortest as prt
@@ -15,9 +16,8 @@ import numpy as np
 import sys
 import time
 class method(object):
-    def kmeans_graph():
-        for i in line1:
-            for j in line2:
+    def 
+        
                
 
 

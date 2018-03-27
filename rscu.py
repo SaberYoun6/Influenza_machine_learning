@@ -24,12 +24,22 @@ class mapping(object):
          j=1
          while codon_used <= j:
              for X in enumerate(sequences):
-            rel_syn_cod_usage[i][j]= X[i][j]/(1/len(sequences)*sum(X[(len(seq)*i))][(j-1)])
+                 lengthOrignal=X[i][j]
+                 sumOrginal= sum(X[len(len(sequences)*i)][j-1]
+                 number= 1/len(sequences)
+                 rel_syn_cod_usages=lengthOrignal/number*sumOrginal
+    return rel_syn_cod_usages
 
     return rel_syn_cod_usage
     def max_codon_usage(sequences,triple_codon_usage,codon_used):
         for i in triple_codon_usages:
             for j in condon_used:
                 for X in enumerate(sequences):
-                    w[i][j]= X[i][j] = x[i][j]* sum(X[len(sequences)*i)][max(seqeunces/3)-1)]/(X[i][max(sequences/3)*(sum(X[
+                   lengthOrginal=X[i][j]
+                   lengthMax=X[i][max(seqeunces)]
+                   sumMax= Sum(X[len(len(seqeunces)*i)][max(seqeunces)])
+                   sumOriginal=sum(X[len(len(seqeuences)*i)][j-l])
+                   w[i][j] =-(-lengthOrginal*sumMax/lengthMax*sumOrginal -lengthOrginal/lengthMax)
 
+
+   return w 
