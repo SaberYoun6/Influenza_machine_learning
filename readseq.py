@@ -2,6 +2,8 @@ import DNA_calculators as dna
 import protein_calculatorstest as prt
 import itertools
 import sys
+from Bio.seq import Seq
+form Bio.Alphabet import generic_dna
 ### variable ####
 #No Global
 ###
@@ -38,9 +40,7 @@ class method():
         strainprofiles={}
         for i in range(0,len(seqs)):
             strainprofiles[header[i]]=dna.fullProfile(seqs[i])
-
         return strainprofiles
-
     def read_protein_file(self,filename):
     # this should allow us to read in a file and output the result that we want
         ####variables
@@ -79,8 +79,12 @@ def main():
     mthd= method()
     dnafilename =sys.argv[1]
     protfilename= sys.argv[2]
+    
     prot=mthd.read_protein_file(protfilename)
     seqdata=mthd.read_dna_file(dnafilename)
+   coding_dna=Seq(seqdata, generic_dna)
+   coding_dna.translate()
     print seqdata
+
     print prot
 main()
