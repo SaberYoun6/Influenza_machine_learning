@@ -36,8 +36,8 @@ class mapping(object):
             for j in condon_used:
                 for X in enumerate(sequences):
                    lengthOrginal=X[i][j]
-                   lengthMax=X[i][max(seqeunces)]
-                   sumMax= Sum(X[len(len(seqeunces)*i)][max(seqeunces)])
+                   lengthMax=X[i][max(len(seqeunces/3)]
+                   sumMax= Sum(X[len(len(seqeunces)*i)][max(len(seqeunces)/3)])
                    sumOriginal=sum(X[len(len(seqeuences)*i)][j-l])
                    w[i][j] =-(-lengthOrginal*sumMax/lengthMax*sumOrginal -lengthOrginal/lengthMax)
 
