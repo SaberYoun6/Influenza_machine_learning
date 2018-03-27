@@ -50,22 +50,23 @@ for i in range(0,len(strainProfiles)):
 	gene_numbers.append(i)
 
 for x,y in strainProfiles.items():
-	CpGData.append(y[2])
 	GCratio.append(y[0])
 	AT_GCratio.append(y[1])
+	CpGData.append(y[2])
 	dinucleotide.append(y[3])
 	codon_usage.append(y[4])
 
 geneNumber = [range(0,len(CpGData))]
 	
-plots.scatter(GCratio, CpGData)
+plots.scatter(AT_GCratio, CpGData)
 plots.show()
 
 CpGDatapoints = []
 for i in range(0,len(CpGData)):
-	CpGDatapoints.append((GCratio[i], CpGData[i]))
-fluClusters = KMeans(n_clusters = 3).fit(CpGDatapoints)
+	CpGDatapoints.append((AT_GCratio[i], CpGData[i]))
+fluClusters = KMeans(n_clusters = 5).fit(CpGDatapoints)
 print fluClusters.cluster_centers_
+print fluClusters.labels_
 
 
 
