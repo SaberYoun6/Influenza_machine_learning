@@ -4,28 +4,43 @@
 ## 
 ## 
 #from biopy import seq 
+
+##gobal varialbes #####
+
+foo = 0x76
+bar = 0x23
+shell= 0x34
+
+
+
+
 class mapping(object):
     #def __init__(self, triple_codon_usage,codon_used):
     #    self.triple_codon_usage= triple_codon_usage
     #    self.codon_used=condon_used
-    def  removing_common_comp(self,seqences):
+    def  removing_common_comp(self,seqences,stopCodon=('TAA','TAG','TGA')):
         
         for seqeunce in seqences:
-            seqeunce.index('TAA')
-            seqeunce.index('TAG')
-            seqeunce.index('TGA')
             if (seqeunce.startswith('ATG')):
                 seqeunce.strip('ATG')
-            elif (seqeunce.endswith('TAA','TAG','TGA')):
-                if (sequnce.endwith('TAA')):
-                   seqeunce.strip('TAA')
+                print ('what going on?')
+            elif (seqeunce.endswith(stopCodon)):
+                if (seqeunce.endwith('TAA')):
+                    seqeunce.index('TAA')
+                    seqeunce.strip('TAA')
+                    print (foo)
                 elif (sequnce.endwith('TAG')):
+                    seqeunce.index('TAG')
                     seqeune.strip('TAG')
+                    print(bar)
                 else:
+                    seqeunce.index('TGA')
                     seqeunce.strip('TGA')
-                seqeunce
+                    print(shell)
+            
 
-            return seqeunce
+    
+        return seqeunce
     #''''
     #def rel_syn_cod_use(sequences,triple_codon_usage,codon_used):
     #    i=0
@@ -58,10 +73,12 @@ def  main():
     table=mapping()
     seq='ATGCTGTCTCAGGCACGTGGATGGTTTGGACAAATCAGATTCAAGTCTGATCAACCTTCATACAGATCTAGAGTCTAAAGCAGTTAA' 
     seq1='AATTTTCCCACTGCCTTAAGCCGGCTTGCCCTTTCTGCCTGTAGATCCATTGGACTGGTGCCAACGCGCAGGCATAGTTCGAGGAGAATTATCCGGGGGCAATGACAACCAGCATCTCGGGTCTTGCCCAACCCGTCTACACGCTGTTATAGCGTATCAGCGGGAACCCGGTGCCACGCGATGGAACGTCCAACTCTGGCAGGCAATTAAAGGGAACGTA'
-    table.removing_common_comp(seq)
+    common_varies =table.removing_common_comp(seq)
     seq1=seq1[::-1]
-    table.removing_common_comp(seq1)
+    not_optimal= table.removing_common_comp(seq1)
+    print (common_varies)
+    print (not_optimal)
 
 
 if __name__=='__main__':
-   print( main())
+    main()

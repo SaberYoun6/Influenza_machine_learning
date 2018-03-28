@@ -1,4 +1,4 @@
-import DNA_calculators as dna
+import dnaAnalysis as  dna
 import protein_calculatorstest as prt
 import itertools
 import sys
@@ -40,7 +40,7 @@ class method():
 
         strainprofiles={}
         for i in range(0,len(seqs)):
-            strainprofiles[header[i]]=dna.fullProfile(seqs[i])
+            strainprofiles[header[i]]=dna.dnaProfile(seqs[i])
         return strainprofiles
     def read_protein_file(self,filename):
     # this should allow us to read in a file and output the result that we want
@@ -80,7 +80,8 @@ def main():
     dnafilename =sys.argv[1] 
     mthd= method(dnafilename)
     seqdata=mthd.read_dna_file(dnafilename)
-    coding_dna=Seq(seqdata, generic_dna)
+
+    coding_dna=Seq(dnafilename, generic_dna)
     protien=coding_dna.translate()
     prot=mthd.read_protein_file(protien)
     print seqdata
