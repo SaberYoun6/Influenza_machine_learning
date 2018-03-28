@@ -2,16 +2,17 @@ import DNA_calculators as dna
 import protein_calculatorstest as prt
 import itertools
 import sys
-from Bio.seq import Seq
-form Bio.Alphabet import generic_dna
+import Bio
+from Bio.Seq import Seq, translate
+from Bio.Alphabet import generic_dna
 ### variable ####
 #No Global
 ###
 
 
 class method():
-    #def __init__(self):
-
+    def __init__(self,filename):
+        self.filename=filename
     def read_dna_file(self,filename):
     # this should allow us to read in a file and output the result that we want
         ####variables
@@ -49,15 +50,15 @@ class method():
         seqs=[]
         prot=""
         ###
-        with open(filename) as f:
+        for line in filename: 
             #we are reading in the file
 #the next few lines are used to obtain both the header of the file and then the seq of the file as well 
-            fh= f.readlines()
+            fh= line.nextline()
 # we are reading file line by line
-            for line in fh:
+            for seqeunces in line:
 #this is returning the fileheader and then appending it by line
-                if(line[0] == ('>')):
-                    header.append(line)
+                if(seqeunces[0] == ('>')):
+                    header.append(seqeunces)
 #this is 
                     if len(prot) != 0:
                         seqs.append(prot)
@@ -76,15 +77,14 @@ class method():
 
 
 def main():
-    mthd= method()
-    dnafilename =sys.argv[1]
-    protfilename= sys.argv[2]
-    
-    prot=mthd.read_protein_file(protfilename)
+    dnafilename =sys.argv[1] 
+    mthd= method(dnafilename)
     seqdata=mthd.read_dna_file(dnafilename)
-   coding_dna=Seq(seqdata, generic_dna)
-   coding_dna.translate()
+    coding_dna=Seq(seqdata, generic_dna)
+    protien=coding_dna.translate()
+    prot=mthd.read_protein_file(protien)
     print seqdata
 
     print prot
-main()
+if __name__=='__main__':
+    main()
