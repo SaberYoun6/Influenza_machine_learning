@@ -32,32 +32,36 @@ class mapping(object):
         else:
               seqs = seq.replace('TGA','')
         return seqs
-    def similarity_martix(self,sequences,comparer,similar_results):
-        pdb.set_trace()
-        count = 0
-        for seq in sequences:
-            for keys,values in comparer.items():
-                for key,value in similar_results.items():
-                    if (seq is values):
+    def divides_by_three(self,seq):
+        if(len(seq)%3 == 0):
+	    return True
+        elif (len(seq)%3==1):
+            return False
+        else:
+            return False
+    #def similarity_martix(self,sequences,comparer,similar_results):
+    #    pdb.set_trace()
+    #    count = 0
+    #    for seq in sequences:
+    #        for keys,values in comparer.items():
+    #            for key,value in similar_results.items():
+    #                if (seq is values):
+    #                if (seq is key):
+    #                while True:
+    #                    if (seq.index(keys)  seq.index(key)):
+    #                        seq[sim]=+seq[comp]
+    #                        number=len(similar_results[key])
 
-                    if (seq is key):
-
-                    while True:
-                        if (seq.index(keys)  seq.index(key)):
-                            seq[sim]=+seq[comp]
-                            number=len(similar_results[key])
-
-
-    def rel_syn_cod_use(self,sequences,amino_acids,codons):
-        pdb.set_trace()
-        j=0
-        for a,i in animo_acids:
-            for c,j in codons:
-                for X in enumerate(sequences):
-                    lenOriginal=X[i][j] 
-                    print (lenOriginal)
-                    sumOriginal= sum(X[len(len(sequences)*i)][j-1])
-                    rel_syn_cod_usage=lenOriginal/((1/number)*sumOriginal)
+    #def rel_syn_cod_use(self,sequences,amino_acids,codons):
+    #    pdb.set_trace()
+    #    j=0
+    #    for a,i in animo_acids:
+    #        for c,j in codons:
+    #            for X in enumerate(sequences):
+    #                lenOriginal=X[i][j] 
+    #                print (lenOriginal)
+    #                sumOriginal= sum(X[len(len(sequences)*i)][j-1])
+    #                rel_syn_cod_usage=lenOriginal/((1/number)*sumOriginal)
         return rel_syn_cod_usage
 
     #def max_codon_usage(sequences,triple_codon_usage,codon_used):
@@ -114,9 +118,11 @@ def  main():
     not_optimal= table.removing_common_comp(seq1)
     print (common_varies)
     print (not_optimal)
-    babel=table.similarity_martix(seq,translation_dictionary,amino_acid_dictionary)
+    babel=table.divides_by_three(common_varies)
+    non_optimal=table.divides_by_three(not_optimal)
+    #babel=table.similarity_martix(seq,translation_dictionary,amino_acid_dictionary)
     print babel
-   
+    print non_optimal 
 
 
 if __name__=='__main__':
