@@ -35,8 +35,6 @@ class mapping(object):
     def divides_by_three(self,seq):
         if(len(seq)%3 == 0):
 	    return True
-        elif (len(seq)%3==1):
-            return False
         else:
             return False
     #def similarity_martix(self,sequences,comparer,similar_results):
