@@ -60,7 +60,7 @@ class mapping(object):
     #                print (lenOriginal)
     #                sumOriginal= sum(X[len(len(sequences)*i)][j-1])
     #                rel_syn_cod_usage=lenOriginal/((1/number)*sumOriginal)
-        return rel_syn_cod_usage
+    #    return rel_syn_cod_usage
 
     #def max_codon_usage(sequences,triple_codon_usage,codon_used):
     #    for i in triple_codon_usages:
