@@ -24,11 +24,9 @@ def dnaProfile(sequence):
 		if base == "G":
 			G +=1
 
-	GC_content = (G+C)/length
+	GC_content = ((G+C)/length)*100
 	strainProfile.append(GC_content)
 
-	AT_CG_ratio = float(A+T)/float(C+G)
-	strainProfile.append(AT_CG_ratio)
 	
 	CpGcounter = 0.0
 	for i in range(0,len(sequence)-1):
@@ -45,7 +43,7 @@ def dnaProfile(sequence):
 	CpGRatio = CpGcounter/CpGexpected
 	strainProfile.append(CpGRatio)
 
-
+'''
 	dinucleotide_dict = {'AA': 0, 'AC': 0, 'GT': 0, 'AG': 0, 'CC': 0, 'CA': 0, 'CG': 0, 'TT': 0, 'GG': 0, 'GC': 0, 'AT': 0, 'GA': 0, 'TG': 0, 'TA': 0, 'TC': 0, 'CT': 0}
 	dinucleotide_frequency = []
 	for i in range(0,len(sequence)-1):
@@ -63,6 +61,7 @@ def dnaProfile(sequence):
 
 	for x,y in sorted(codons.items()):
 		codon_frequency.append(y/float(len(codons)))
+'''
 	strainProfile.append(codon_frequency)
-	
+
 	return strainProfile
