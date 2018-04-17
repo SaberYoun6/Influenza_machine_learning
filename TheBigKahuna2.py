@@ -90,6 +90,26 @@ while i<4:
 			del NAsequencesDNA[index]
 	
 	i+=1
+	
+i=0
+while i<4:
+	for sequence in HAsequencesDNA:
+		if len(sequence)<100:
+			index = HAsequencesDNA.index(sequence)
+			del HAheaders[index]
+			del HAsequencesDNA[index]
+			del NAheaders[index]
+			del NAsequencesDNA[index]
+			
+	for sequence in NAsequencesDNA:
+		if len(sequence)<100:
+			index = NAsequencesDNA.index(sequence)
+			del HAheaders[index]
+			del HAsequencesDNA[index]
+			del NAheaders[index]
+			del NAsequencesDNA[index]
+	
+	i+=1
 
 	
 HAanalysisDNA = []
