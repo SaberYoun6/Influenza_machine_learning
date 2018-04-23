@@ -55,7 +55,7 @@ class App:
         savefile = False
         openfile=str(self.obtain_file())
         savefile= str(self.creating_file())
-        if openfile != False or savefile != False:
+        if savefile != False:
             savefile = 'output.csv'
         sub.call(["python","TheBigKahuna2.py", openfile , savefile])
 
