@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #import TheBigKahuna2
 from Tkinter import *
 from tkFileDialog import * 
