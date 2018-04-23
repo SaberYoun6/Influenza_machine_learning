@@ -1,1 +1,2 @@
-To look at PB2, HA, and NA binding domain we could look at possible co-mutations and check them based and screen all the others  
+To look at PB2, HA, and NA binding domain we could look at possible co-mutations and check them based and screen all the others 
+I need to get it off hardcoding  
