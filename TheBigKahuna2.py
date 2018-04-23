@@ -44,7 +44,7 @@ for header in headers:
 		NAsequencesDNA.append(sequences[index])
 
 	
-print len(HAheaders), len(NAheaders)
+print "You have " + str(len(HAheaders)) + " strains."
 
 i=0
 while i<4:
@@ -110,6 +110,8 @@ while i<4:
 			del NAsequencesDNA[index]
 	
 	i+=1
+	
+print "After removing incomplete data, you have " + str(len(HAheaders)) + " strains."
 
 	
 HAanalysisDNA = []
@@ -186,8 +188,6 @@ for sequence in HAsequencesProtein:
 	
 	GRAVY_scoresHA.append(GRAVYscore)
 	
-print len(amino_acids)
-print len(dipeptides_dict)	
 
 NAsequencesProtein = []
 for NA in NAsequencesDNA:
@@ -277,8 +277,7 @@ for i in range(0,len(FinalLists)):
 	distances.append(distance)
 
 closest_neighbor = distances.index(min(distances))	
-print HAheaders[closest_neighbor]
-print NAheaders[closest_neighbor]
+print "The predicted vaccine strain for next season is " + HAheaders[closest_neighbor][HAheaders[closest_neighbor].index("(A/")+1:HAheaders[closest_neighbor].index("))|N")+1]
 
 print HAsequencesProtein[closest_neighbor]
 	
