@@ -101,8 +101,8 @@ ENV/
 .mypy_cache/
 
 #swp
-.swp.py
-.swo.py
+*.swp.py
+*.swo.py
 #fasta
 .fasta
 .fastq
