@@ -52,16 +52,14 @@ class App:
             return 
         return fToSave
     def run_the_big(self):
-        savefile = False
         openfile=str(self.obtain_file())
         savefile= str(self.creating_file())
-        if savefile != False:
-            savefile = 'output.csv'
         sub.call(["python","TheBigKahuna2.py", openfile , savefile])
 
         #print sub.call(["python","TheBigKahuna2.py" ,"H3N21617.fasta", "output3.csv"])
 cwd= os.getcwd()
 root =Tk()
+root.title("HA-FLU-NA Matatata")
 root.geometry("200x100")
 
 app=App(root)
