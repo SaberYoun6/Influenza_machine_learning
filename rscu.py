@@ -44,31 +44,58 @@ class mapping(object):
         if (seq == None):
             return None
 
-        elif(len(seq)  / 100 >= 1) :
+        elif len(seq) / 100 >= 1:
             return seq
-
+        elif len(seq) / 200 >= 1:
+            return seq
+        elif len(seq) / 300 >= 1:
+            return seq
+        elif len(seq) / 400 >= 1:
+            return seq
         else:
              return None
+ #codon_matrix=table.similarity_martix_codon(common_varies,codon_value_dictonary)
 
     def similarity_martix_codon(self,new_seq,comparer):
-        
+        #
         for i in range(0,len(new_seq),3):
             for keys,values in comparer.items():
                 if new_seq[i:i+3] == keys:
                     comparer[keys] += 1
         return comparer 
+ #  bablyon_tower= table.similarity_matrix_amino(babel_tower,translation_dictionary,)
+    def translation(self,new_seq,translation_dict):
+        proteins=''
+        for i in range(0,len(new_seq),3):
+                codon = new_seq[i:i+3]
+                proteins += translation_dict[codon]
+        return proteins
 
-    def similarity_matrix_amino(self,codon,trans):
-        temp_dict={}
-        
-        for k,v in codon.items():
-            values= 0
-            for ke,va in trans.items():
-                if va == k :
-                    values += v
-                temp_dict[ke]= values
+    # table.dipetide_freq(babylon_tower, dipeitide)
+    def dipetide_freq(self, new_protein, dipetides):
+        all_count = {}
+        for dipetide in dipetides:
+            count = new_protein.count(dipetide)
+            if count > 0:
+                all_count[dipetide] = count
+        return all_count
+   # table.similarity_matrix_protien(babylon_tower,protein_list):
+    def similarity_matrix_protien(self,new_protein, proteins):
+        all_count= {}
+        for protein in proteins:
+            count = new_protein.count(protein)
+            if count > 0:
+                all_count[protein]= count
+        return all_count
 
-        return temp_dict 
+
+    def dinucleotides_freq(self,new_seq,dinucleotides):
+        all_count= {}
+        for dinucleotide in dinucleotides:
+            count = new_seq.count(dinucleotide)
+            if count > 0:
+                all_count[dinucleotide] = count
+        return all_count
 
 
     #def rel_syn_cod_use(self,sequences,amino_acids,codons):
@@ -95,28 +122,60 @@ class mapping(object):
     #    return w 
 
 def  main():
+    dinucleotides = ['AA', 'AT', 'AG', 'AC',
+                   'TA' , 'TT', 'TG', 'TC',
+                   'GA', 'GT',  'GG', 'GC',
+                   'CA', 'CT', 'CG', 'CT']
+
     translation_dictionary= {
-            'A' : 'GCU' , 'A' : 'GCC' , 'A' : 'GCA' , 'A' : 'GCG' ,
-            'R' : 'CGU' , 'R' : 'CGC' , 'R' : 'CGA' , 'R' : 'CGG' , 'R' : 'AGA' , 'R' : 'AGG' ,
-            'C' : 'UGU' , 'C' : 'UGC',
-            'N' : 'AAU' , 'N' : 'AAC' , 'D' : 'GAU' , 'D' : 'GAC' ,
-            'E' : 'GAA' , 'E' : 'GAG' , 'Q' : 'CAA' , 'Q' : 'CAG' ,
-            'G' : 'GGU' , 'G' : 'GGC' , 'G' : 'GGA' , 'G' : 'GGG' , 'H' : 'CAU' , 'H' : 'CAC' ,
-            'I' : "AUU" , 'I' :' AUC' , 'I' : 'AUA' , 
-            'L' : 'CUU' , 'L' : 'CUC' , 'L' : 'CUA' , 'L' : 'CUG' , 'L' : 'UUA' , 'L' : 'UUG' ,
-            'K' : 'AAA' , 'K' : 'AAG' , 'M' : 'AUG' , 'F' : 'UUU' , 'F' : 'UUC' ,
-            'P' : 'CCU' , 'P' : 'CCC' , 'P' :' CCA' , 'P' : 'CCG',
-            'S' : 'UCU' , 'S' : 'UCC' , 'S' : 'UCA' , 'S' : 'UCG', 'S' : 'AGU' , 'S' : 'AGC' ,
-            'T' : 'ACU' , 'T' : 'ACC' , 'T' : 'ACA' , 'T' : 'ACG' , 'W' : 'UGG',
-            'Y' : 'UAU' , 'Y' : 'UAC' , 'V' : 'GUU' , 'V' : 'GUC' , 'V' : 'GUA' , 'V' : 'GUG'
-        }
-    amino_acid_dictionary = {
-            'A' : 0.0 , 'R' : 0.0  , 'N' : 0.0 , 'D' : 0.0 , 'C' : 0.0 ,
-            'Q' : 0.0 , 'E' : 0.0  , 'G' : 0.0 , 'H' : 0.0 , 'I' : 0.0 ,
-            'L' : 0.0 , 'K' : 0.0  , 'M' : 0.0 , 'F' : 0.0 , 'P' : 0.0 ,
-            'S' : 0.0 , 'T' : 0.0  , 'W' : 0.0 , 'Y' : 0.0 , 'V' : 0.0
-            }
-    codon_value_dictonary ={
+            'GCU': 'A' , 'GCC' : 'A' , 'GCA' : 'A' , 'GCG' : 'A' ,
+            'CGU' : 'R' , 'CGC' : 'R' , 'CGA' : 'R' , 'CGG' : 'R' , 'AGA' : 'R' , 'AGG' : 'R' ,
+            'UGU' : 'C' , 'UGC' : 'C',
+            'AAU' : 'N' , 'AAC' : 'N' ,
+            'GAU' : 'D' , 'GAC' : 'D' ,
+            'GAA' : 'E' , 'GAG' : 'E' ,
+            'CAA' : 'Q' , 'CAG' : 'Q' ,
+            'GGU' : 'G' , 'GGC' : 'G' , 'GGA' : 'G' , 'GGG' : 'G' ,
+            'CAU' : 'H' , 'CAC' : 'H' ,
+            'AUU' : "I" , 'AUC' :'I' , 'AUA' : 'I' , 
+            'CUU' : 'L' , 'CUC' : 'L' , 'CUA' : 'L' , 'CUG' : 'L' , 'UUA' : 'L' , 'UUG' : 'L' ,
+            'AAA' : 'K' , 'AAG' : 'K' ,
+            'AUG' : 'M' ,
+            'UUU' : 'F' , 'UUC' : 'F' ,
+            'CCU' : 'P' , 'CCC' : 'P' , 'CCA' :' P' , 'CCG' : 'P',
+            'UCU' : 'S' , 'UCC' : 'S' , 'UCA' : 'S' , 'UCG' : 'S', 'AGU' : 'S' , 'AGC' : 'S' ,
+            'ACU' : 'T' , 'ACC' : 'T' , 'ACA' : 'T' , 'ACG' : 'T' ,
+            'UGG' : 'W' ,
+            'UAU' : 'Y' , 'UAC' : 'Y' ,
+            'GUU' : 'V' , 'GUC' : 'V' , 'GUA' : 'V' , 'GUG' : 'V', 
+            'UAA' : ' ', 'UGA' : ' ' , 'UAG' : ' ' }
+    amino_acid_list = [
+            'A' , 'R' , 'N' , 'D' , 'C' ,
+            'Q' , 'E' , 'G' , 'H' , 'I' ,
+            'L' , 'K' , 'M' , 'F' , 'P' ,
+            'S' , 'T' , 'W' , 'Y' , 'V' ,
+            " " 
+            ]
+    dipeitide= [ 
+              'AA','AR','AN','AD','AE','AQ','AG','AH','AI','AL','AK','AM','AL','AK','AF','AP','AS','AT','AW','AY','AV',"A ",
+              'RA' , 'RR' , 'RC', 'RN', 'RD', 'RE' , 'RQ' , 'RG' , 'RH' , 'RI' , 'RM', 'RL' , 'RK' , 'RM' , 'RF' , 'RP' , 'RS' ,'RT', 'RW' , 'RY' , 'RV', "R ",
+              'CA' , 'CR' , 'CC' , 'CN', 'CD', 'CE' , 'CQ' ,'CG', 'CH' ,'CI','CM' ,'CL', 'CK', 'CM', 'CF', 'CP' , 'CS', 'CT', 'CW', 'CY', 'CV', 'C ',
+              'NA', 'NR', 'NC', 'ND' , 'NE' , 'NQ' , 'NG' ,'NH', 'NI','NM', 'NL', 'NK' , 'NN' ,'NF', 'NP','NS','NT','NW','NY','NV', 'N ',
+              'DA' , 'DR' , 'DC' , 'DN' , 'DD' , 'DE' , 'DQ' , 'DG' , 'DH' , 'DI' ,  'DL' , 'DM' , 'DK', 'DF' , 'DP' , 'DS' , 'DT' , 'DW' , 'DY' , 'DV' ,'D ',
+              'EA' , 'ER' , 'EC' , 'EN' , 'ED' , 'EE' , 'EQ' , 'EG' , 'EH' , 'EI' ,  'EL' , 'EM' , 'EK', 'EF' , 'EP' , 'ES' , 'ET' , 'EW' , 'EY' , 'EV' ,'E ',
+              'QA' , 'QR' , 'QC' , 'QN' , 'QD' , 'QE' , 'QQ' , 'QG' , 'QH' , 'QI' ,  'QL' , 'QM' , 'QK', 'QF' , 'QP' , 'QS' , 'QT' , 'QW' , 'QY' , 'QV' ,'Q ',
+              'GA' , 'GR' , 'GC' , 'GN' , 'GD' , 'GE' , 'GQ' , 'GG' , 'GH' , 'GI' ,  'GL' , 'GM' , 'GK', 'GF' , 'GP' , 'GS' , 'GT' , 'GW' , 'GY' , 'GV' ,'G ',
+              'HA' , 'HR' , 'HC' , 'HN' , 'HD' , 'HE' , 'HQ' , 'HG' , 'HH' , 'HI' ,  'HL' , 'HM' ,'HK', 'HF' , 'HP' , 'HS' , 'HT' , 'HW' , 'HY' , 'HV' ,'H ',
+              'IA' , 'IR' , 'IC' , 'IN' , 'ID' , 'IE' , 'IQ' , 'IG' , 'IH' , 'II' ,  'IL' , 'IM', 'IK', 'IF' , 'IP' , 'IS' , 'IT' , 'IW' , 'IY' , 'IV' ,'I ',
+              'FA' , 'FR' , 'FC' , 'FN' , 'FD' , 'FE' , 'FQ' , 'FG' , 'FH' , 'FI' ,  'FL' , 'FM', 'FK', 'FF' , 'FP' , 'FS' , 'FT' , 'FW' , 'FY' , 'FV' ,'F ',
+              'MA' , 'MR' , 'MC' , 'MN' , 'MD' , 'ME' , 'MQ' , 'MG' , 'MH' , 'MI' ,  'ML' , 'MM', 'MK', 'MF' , 'MP' , 'MS' , 'MT' , 'MW' , 'MY' , 'MV' ,'M ',
+              'PA' , 'PR' , 'PC' , 'PN' , 'PD' , 'PE' , 'PQ' , 'PG' , 'PH' , 'PI' ,  'PL' , 'PM', 'PK', 'PF' , 'PP' , 'PS' , 'PT' , 'PW' , 'PY' , 'PV' ,'P ',
+              'YA' , 'YR' , 'YC' , 'YN' , 'YD' , 'YE' , 'YQ' , 'YG' , 'YH' , 'YI' ,  'YL' , 'YM', 'YK', 'YF' , 'YP' , 'YS' , 'YT' , 'YW' , 'YY' , 'YV' ,'Y ',
+              ' A' , ' R' , ' C' , ' N' , ' D' , ' E' , ' Q' , ' G' , ' H' , ' I' ,  ' L' , ' M', ' K', ' F' , ' P' , ' S' , ' T' , ' W' , ' Y' , ' V' ,'  ',
+              'VA' , 'VR' , 'VC' , 'VN' , 'VD' , 'VE' , 'VQ' , 'VG' , 'VH' , 'VI' ,  'VL' , 'VM', 'VK', 'VF' , 'VP' , 'VS' , 'VT' , 'VW' , 'VY' , 'VV' ,'V ',
+              ]
+
+    codon_value_dictonary ={ 
         'GCU' : 0.0 , 'GCC' : 0.0 , 'GCA' : 0.0 , 'GCG' : 0.0 ,
         'CGU' : 0.0 , 'CGC' : 0.0 , 'CGA' : 0.0 , 'CGG' : 0.0 , 'AGA' : 0.0 , 'AGG' : 0.0 ,
         'AAU' : 0.0 , 'AAC' : 0.0 , 'GAU' : 0.0 , 'GAC' : 0.0 ,
@@ -128,43 +187,64 @@ def  main():
         'UCU' : 0.0 , 'UCC' : 0.0 , 'UCA' : 0.0 , 'UCG' : 0.0 , 'AGU' : 0.0 , 'AGC' : 0.0 ,
         'CGU' : 0.0 , 'ACC' : 0.0 , 'ACA' : 0.0 , 'ACG' : 0.0,  'UGG' : 0.0 ,
         'UAU' : 0.0 , 'UAC' : 0.0 , 'GUU' : 0.0 , 'GUC' : 0.0,  'GUA' : 0.0 , 'GUG' : 0.0 ,
+        "UAG" : 0.0, "UAA" : 0.0, "UGA" : 0.0
         }
     seq='ATGAATCCAAATCAAAAAATAATAACCATTGGATCAATCAGTATAGCAATCGGGATAATTAGTCTAATGTTGCAAATAGGAAATATTATTTCAATATGGGCTAGTCACTCAATCCAAACTGGAAGTCAAAACCACACTGGAATATGCAACCAAAGAATCATCACATATGAAAACAGCACCTGGGTGAATCACACATATGTTAGTATTAACAACACTAATGTTGTTGCTGGAAAGGACAAAACTTCAGTGACATTGGCCGGCAATTCATCTCTTTGTTCTATCAGTGGATGGGCTATATACACAAAAGACAACAGCATAAGAATTGGCTCCAAAGGAGATGTTTTTGTCATAAGAGAACCTTTCATATCATGTTCTCATTTGGAATGCAGGACCTTTTTTCTGACCCAAGGTGCTCTATTAAATGACAAACATTCAAATGGAACCGTTAAGGACCGAAGTCCTTATAGGGCCCTAATGAGCTGTCCTCTAGGTGAAGCTCCGTCTCCATACAATTCAAAGTTTGAATCAGTTGCATGGTCAGCAAGCGCATGCCATGATGGCATGGGCTGGTTAACAATCGGAATTTCTGGTCCAGACAATGGAGCTGTGGCTGTACTAAAATACAACGGAATAATAACTGAAACCATAAAAAGTTGGAAAAAGCGAATATTGAGAACACAAGAGTCTGAATGTGTCTGTGTGAACGGGTCATGTTTCACCATAATGACCGATGGCCCGAGTAATGGGGCCGCCTCGTACAAAATCTTCAAGATCGAAAAGGGGAAGGTTACTAAATCAATAGAGTTAAATGCACCCAATTTTCATTATGAGGAATGTTCCTGTTACCCAGACACTGGCACAGTGATGTGTGTATGCAGGGACAACTGGCATGGTTCAAATCGACCTTGGGTGTCTTTTAATCAAAACTTGGATTATCAAATAGGATACATCTGCAGTGGAGTGTTCGGTGACAATCCGCGTCCCAAAGATGGAAAGGGCAGCTGTAATCCAGTGACTGTTGATGGAGCAGACGGGGTTAAGGGGTTTTCATACAAATATGGTAATGGTGTTTGGATAGGAAGAACTAAAAGTAACAGACTTAGAAAGGGGTTTGAGATGATTTGGGATCCTAATGGATGGACAGATACCGACAGTGATTTCTCAGTGAAACAGGATGTTGTGGCAATAACTGATTGGTCAGGGTACAGTGGAAGTTTCGTTCAACATCCTGAGTTAACAGGATTGGACTGTATAAGACCTTGCTTCTGGGTTGAGTTAGTCAGAGGACTGCCTAGAGAAAATACAACAATCTGGACTAGTGGGAGCAGCATTTCTTTTTGTGGCGTTGATAGTGATACTGCAAACTGGTCTTGGCCAGACGGTGCTGAGTTGCCGTTCACCATTGACAAGTAG'
     seq1='ATGAAAGTAAAACTACTGGTCCTATTATGCACATTTACAGCTACATATGCAGACACAATATGTATCGGCTACCATGCCAACAACTCAACCGACACTGTTGACACAGTACTTGAAAAGAATGTGACAGTGACACACTCTGTCAACCTGCTTGAGGACAACCACAATGGAAAACTATGTCTATTAAAAGGAATAGCCCCATTACAATTGGGTAACTGCAGCGTTGCCGGGTGGATCTTAGGAAACCCAGAATGCGAATTACTGATTTCCAAGGAGTCATGGTCCTACATTGTAGAAAAACCAAATCCTGAGAATGGAACATGTTACCCAGGGCATTTCGCCGACTATGAGGAACTGAGGGAGCAATTGAGTTCAGTATCTTCATTTGAGAGGTTCGAAATATTCCCCAAAGAAAGCTCATGGCCCAACCACACCGTAACCGGAGTATCCGCATCATGCTCCCATAATGGGGAAAGCAGCTTTTACAAAAATTTGCTATGGCTGACGGGAAAGAATGGTTTGTACCCAAACCTGAGCAAGTCCTATGCAAACAACAAAGAGAAAGAAGTCCTCGTACTATGGGGTGTTCATCACCCGCCAAACATAGGTGACCAAATGACCCTCTATCATAAAGAAAATGCTTATGTCTCTGTAGTGTCTTCACATTATAGCAGAAAATTCACCCCAGAAATAGCCAAAAGACCCAAAGTAAGAGATCAAGAAGGAAGAATCAACTACTACTGGACTCTGCTTGAACCCGGGGATACAATAATATTTGAGGCAAATGGAAATCTAATAGCGCCAAGATATGCTTTCGCACTGAGTAGAGGCTTTGGATCAGGAATCATCAACTCAAATGCACCAATGGATGAATGTGATGCGAAGTGCCAAACACCTCAGGGAGCTATAAACAGCAGTCTTCCTTTCCAGAATGTACACCCAGTCACAATAGGAGAATGTCCAAAGTATGTCAGGAGTGCAAAATTAAGGATGGTTACAGGACTAAGGAACATCCCATCCATTCAATCCAGAGGTTTGTTTGGAGCCATTGCCGGTTTCATTGAAGGGGGGTGGACTGGAATGGTAGATGGTTGGTATGGTTATCATCACCAGAATGAGCAAGGATCTGGCTATGCTGCAGATCAAAAAAGCACACAAAATGCCATTAATGGGATTACAAACAAGGTGAATTCTGTAATTGAGAAGATGAACACTCAATTCACAGCTGTGGGCAAAGAATTCAACAAATTGGAAAGAAGGATGGAAAACTTAAATAAAAAAGTTGATGACGGGTTTATAGACGTTTGGACATATAATGCAGAACTGTTGGTTCTACTGGAAAATGAAAGAACTTTGGATTTCCATGACTCCAATGTGAAGAATTTGTATGAGAAAGTAAAAAATCAATTAAAGAATAATGCCAAAGAAATAGGAAATGGGTGTTTTGAATTTTATCACAAGTGTAACGATGAATGCATGGAGAGTGTAAAAAATGGAACTTATGACTATCCAAAATATTCCGAAGAATCAAAGTTAAGCAGGGAGAAAATTGATGGAGTGAAATTGGAATCAATGGGAGTCTATCAGATTCTGGCGATCTACTCAACAGTCGCCAGTTCTCTGGTTCTTTTGGTCTCCCTGGGGGCAATCAGCTTCTGGATGTGTTCCAATGGGTCTTTGCAGTGTAGAATATGCATCTAA'
     
-    table=mapping(seq)
+    table=mapping(seq1)
+
     common_varies=table.removing_common_comp()
+
+    dinucleotide_freqency= table.dinucleotides_freq(common_varies,dinucleotides)
+
     common_varies = common_varies.replace('T','U')
     
-    tabling=mapping(seq1)
+    tabling=mapping(seq)
     not_optimal= tabling.removing_common_comp()
     not_optimal= not_optimal.replace('T','U')
     
     print ("%s \n",common_varies)
     print ("%s \n",not_optimal)
 
-
     babel=(table.divides_by_three(common_varies))
     non_optimal=(tabling.divides_by_three(not_optimal))
-    
-    babel_tower=table.similarity_martix_codon(common_varies,codon_value_dictonary)
-
-
+    print(dinucleotide_freqency) 
 
 
     print("%s \n",babel)
     print("%s \n",non_optimal)
-    bablyon_tower= table.similarity_matrix_amino(babel_tower,translation_dictionary)
+    bablyon_tower= table.translation(common_varies,translation_dictionary)
+    protein_frequncy = table.similarity_matrix_protien(bablyon_tower,amino_acid_list)
 
-    tower=(table.greater_then_hundred(common_varies))
     def_optimal=table.greater_then_hundred(non_optimal)
+    dipetide_frequency = table.dipetide_freq(bablyon_tower,dipeitide)
+    tower=(table.greater_then_hundred(common_varies))
 
     print("%s \n",tower)
     print("%s \n",def_optimal)
 
-    print(babel_tower)
+    babel_tower=table.similarity_martix_codon(common_varies,codon_value_dictonary)
+
+    def_optimized = tabling.similarity_martix_codon(def_optimal,codon_value_dictonary)
     
-    print(bablyon_tower)
+    sort_bable_tower= sorted(babel_tower.items(),key =lambda x : x[1], reverse = True)
+
+    sort_def_optimized= sorted(def_optimized.items(),key =lambda x : x[1], reverse = True)
+
+    for i in sort_bable_tower:
+       print("%s : %.1f" %(i[0], i[1]))
+    for i in sort_def_optimized:
+       print("%s : %.1f"%(i[0],i[1]))
+
+    #print(bablyon_tower)
+
+    #print(type(protein_frequncy))
+
+    #print(protein_frequncy)
+    #sorted_dipetide_freq = sorted(dipetide_frequency.items(),key =lambda x : x[1], reverse = True)
+    #for i in sorted_dipetide_freq:
+    #   print ( " %s : %.1f"%(i[0],i[1]))
 
 if __name__=='__main__':
     main()
