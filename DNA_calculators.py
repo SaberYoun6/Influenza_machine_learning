@@ -12,38 +12,42 @@
 
 #the fullProfile produces a list in the order GC content, AT/GC ratio, CpG ratio,
 #dinucleotide frequency, and then codon frequency 
-def dnaProfile(sequence):
-	length = float(len(sequence))
-	strainProfile = []
-	A, C, G, T = 0, 0, 0, 0
-	for base in sequence: 
-		if base == "A":
-			A +=1.0
-		if base == "C":
-			C +=1.0
-		if base == "T":
-			T +=1.0
-		if base == "G":
-			G +=1.0
+class DNA_profile(object):
+	def __init__(self,sequence):
+		
+		self.sequence=sequence
 
-	GC_content = ((G+C)/length)*100
-	strainProfile.append(GC_content)
-	
-	CpGcounter = 0.0
-	for i in range(0,len(sequence)-1):
-		if sequence[i] == "C" and i != len(sequence):
-			if sequence[i+1] =="G":
-				CpGcounter += 1.0
-		else:
-			continue
+	def dnaProfile(self):
 
-	Gfrequency = G/length
-	Cfrequency = C/length
-	CpGexpected = int(((Cfrequency*Gfrequency)*length))
+		length = float(len(self.sequence))
+		strainProfile = []
+		A, C, G, T = 0, 0, 0, 0
+		for base in self.sequence: 
+			if base == "A":
+				A +=1.0
+			if base == "C":
+				C +=1.0
+			if base == "T":
+				T +=1.0
+			if base == "G":
+				G +=1.0
+		GC_content = ((G+C)/length)*100
+		strainProfile.append(GC_content)
+		CpGcounter = 0.0
+		for i in range(0,len(self.sequence)-1):
+			if self.sequence[i] == "C" and i != len(self.sequence):
+				if self.sequence[i+1] =="G":
+					CpGcounter += 1.0
+			else:
+				continue
+		Gfrequency = G/length
+		Cfrequency = C/length
+		CpGexpected = int(((Cfrequency*Gfrequency)*length))
 
-	CpGRatio = (CpGcounter/CpGexpected)*100
-	strainProfile.append(CpGRatio)
+		CpGRatio = (CpGcounter/CpGexpected)*100
+		strainProfile.append(CpGRatio)
 
+		return strainProfile
 
 	#dinucleotide_dict = {'AA': 0, 'AC': 0, 'GT': 0, 'AG': 0, 'CC': 0, 'CA': 0, 'CG': 0, 'TT': 0, 'GG': 0, 'GC': 0, 'AT': 0, 'GA': 0, 'TG': 0, 'TA': 0, 'TC': 0, 'CT': 0}
 	#dinucleotide_frequency = []
@@ -64,4 +68,3 @@ def dnaProfile(sequence):
 	#	codon_frequency.append((y/(length/3))*100)
 	#strainProfile.append(codon_frequency)
 	
-	return strainProfile
