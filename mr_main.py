@@ -6,8 +6,8 @@ import rscu as rs
 import fileparser as fpa
 import DNA_calculators as dna
 import sys
-import multiproccessing as mpi
-import multithreading as mti
+import multiprocessing as mpi
+import multithread as mti
 
 
 
@@ -21,9 +21,13 @@ def main():
 	readed=fpa.file_reader(file1)
 	reads=reader.file_readers()
 	reades=readed.file_readers()
-
+	head = reader.header_setter(reads)
+	seq  = reader.seq_setter(reads)
+	print("%s\n"%reads)
+	print ("%s\n"%head)
+	print ("%s\n"%seq)
 	
 
 
 
-
+main()

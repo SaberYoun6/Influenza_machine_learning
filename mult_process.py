@@ -4,14 +4,14 @@ import sys
 
 def worker():
     name = mpi.current_process().name
-    print name , "Starting"
+    print (name , "Starting")
     time.sleep(2)
-    print name, "Exiting"
+    print (name, "Exiting")
 def my_service():
     name = mpi.current_process().name
-    print name, 'starting'
+    print (name, 'starting')
     time.sleep(3)
-    print name, 'exiting'
+    print (name, 'exiting')
 
 def main():
     service = mpi.Process(name='my_service', target= my_service)
